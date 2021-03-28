@@ -1,0 +1,50 @@
+//Check if Array Pairs are Divisible by K
+import java.util.*;
+public class HashmapProblem 
+{
+	public static boolean DivisiblebyK(int arr[],int k)
+	{
+		HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+		for(int val:arr)
+		{
+			int rem = val%k;
+			
+			int of = map.getOrDefault(rem, 0);
+			
+			map.put(rem, of+1);
+		}
+		
+		for(int val:arr)
+		{
+			int rem = val%k;
+			
+			if(rem==0)
+			{
+				int fq = map.get(rem);
+				if(fq%2==1)
+					return false;
+			}
+			else if(2*rem==k)
+			{
+				int fq = map.get(rem);
+				if(fq%2==1)
+					return false;
+			}
+			else
+			{
+				int fq = map.get(rem);
+				int ofq = map.getOrDefault(k-rem, 0);
+				if(fq!=ofq)
+					return false;
+			}
+		}
+		return true;
+	}
+	public static void main(String[] args) 
+	{
+		int arr[] =  {92, 75, 65, 48, 45, 35};
+		int k=10;
+		
+		System.out.println(DivisiblebyK(arr,k));
+	}
+}
