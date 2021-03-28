@@ -1,0 +1,64 @@
+//Smallest window in a string containing all the characters of another string
+import java.util.*;                                                                                             
+public class Practice                                                                                           
+{                                                                                                               
+	public static String smallestSubstringWithAllPatternCharcaters(String str, String pattern)                  
+	{	                                                                                                        
+		HashMap<Character,Integer> pat = new HashMap<Character,Integer>();                                      
+	    String ans ="";                                                                                         
+	    for(int i=0;i<pattern.length();i++)                                                                     
+	    {                                                                                                       
+	    	char ch = pattern.charAt(i);                                                                        
+	    	pat.put(ch ,pat.getOrDefault(ch,0)+1);                                                              
+	    }                                                                                                       
+	                                                                                                            
+	    int matchcount=0;                                                                                       
+	                                                                                                            
+	    HashMap<Character,Integer> text = new HashMap<Character,Integer>();                                     
+	                                                                                                            
+	    int i =-1;                                                                                              
+	    int j =-1;                                                                                              
+	    while(true)                                                                                             
+	    {                                                                                                       
+	    	boolean flag1=false;                                                                                
+	    	boolean flag2=false;                                                                                
+	    	                                                                                                    
+	    	while(i<str.length()-1 && matchcount<pattern.length())                                              
+	    	{                                                                                                   
+	    	   flag1=true;                                                                                      
+	    	   i++;                                                                                             
+	    	   char ch= str.charAt(i);                                                                          
+	    	   text.put(ch, text.getOrDefault(ch, 0)+1);                                                        
+	    	                                                                                                    
+	    	   if(text.getOrDefault(ch,0)<=pat.getOrDefault(ch,0))                                              
+	    		   matchcount++;                                                                                
+	    	}   	                                                                                            
+	    	while(j<i && matchcount==pattern.length())                                                          
+	    	{                                                                                                   
+	    		String pans = str.substring(j+1,i+1);                                                           
+	    		if(ans.length()==0 || pans.length()<ans.length())                                               
+	    			ans=pans;                                                                                   
+	    		flag2=true;                                                                                     
+	    		j++;                                                                                            
+	    		char ch = str.charAt(j);                                                                        
+	    		if(text.get(ch)==1)                                                                             
+	    			text.remove(ch);                                                                            
+	    		else                                                                                            
+	    			text.put(ch,text.get(ch)-1);                                                                
+	    		if(text.getOrDefault(ch,0)<pat.getOrDefault(ch,0))                                              
+	    			matchcount--;                                                                               
+	    	}                                                                                                   
+	    	                                                                                                    
+	    	if(flag1==false && flag2==false)                                                                    
+	    		break;                                                                                          
+	    }                                                                                                       
+	    return ans;                                                                                             
+	}                                                                                                           
+	public static void main(String[] args)                                                                      
+	{                                                                                                           
+		String str = "zoomlazapzo";                                                                             
+	    String pattern = "oza";                                                                                 
+	    System.out.println(smallestSubstringWithAllPatternCharcaters(str, pattern));                            
+	}                                                                                                           
+}                                                                                                               
+                                                                                                                
