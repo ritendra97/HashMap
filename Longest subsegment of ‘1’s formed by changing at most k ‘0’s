@@ -1,0 +1,36 @@
+//Longest subsegment of ‘1’s formed by changing at most k ‘0’s
+import java.util.*;
+public class HashmapProblem 
+{
+	public static int longestSubSeg(int a[], int n, int k)
+	{
+		int zeros=0;
+		int j=-1;
+		int max_len = Integer.MIN_VALUE;
+		
+		for(int i=0;i< n;i++)
+		{
+			if(a[i]==0)
+				zeros++;
+			
+			while(zeros>k)
+			{
+				j++;
+				if(a[j]==0)
+					zeros--;
+			}
+			int len = i-j;
+			if(max_len<len)
+				max_len=len;
+		}
+		return max_len;
+	}
+	public static void main(String[] args) 
+	{
+		int a[] = { 1, 0, 0, 1, 0, 1, 0, 1 };
+	    int k = 2;
+	    int n = a.length;
+	    System.out.println( longestSubSeg(a, n, k));
+	}
+
+}
