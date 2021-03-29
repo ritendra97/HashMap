@@ -56,3 +56,39 @@ public class HashmapProblem
 	    System.out.print(countSub(str));
 	}
 }
+//O(n) Time Complexity
+//)(1) space
+import java.util.*;
+public class HashmapProblem 
+{
+	public static int countSub(String str)
+	{
+		HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+		
+		int i=0	;
+		int j=0;
+		int total=0;
+	    int char_count[] = new int[26];
+	    while(i<str.length())
+	    {
+	    	if(j<str.length() && char_count[str.charAt(j)-'a']==0)
+	    	{
+	    		char_count[str.charAt(i)-'a']++;
+		    	total+=j-i+1;
+		    	j++;
+	    	}
+	    	else
+	    	{
+	    		char_count[str.charAt(i)-'a']--;
+	    		i++;
+	    	}
+	    }
+		return total;
+	}
+	public static void main(String[] args) 
+	{
+		String str = "gffg";
+		 
+	    System.out.print(countSub(str));
+	}
+}
