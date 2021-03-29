@@ -1,0 +1,58 @@
+//Count of substrings having all distinct characters
+// Time O(n)
+// Space O(n);
+import java.util.*;
+public class HashmapProblem 
+{
+	public static int countSub(String str)
+	{
+		HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+		
+		int i=-1;
+		int j=-1;
+		int total=0;
+		
+		while(true)
+		{
+			boolean f1 = false;
+			boolean f2 = false;
+			
+			while(i<str.length()-1)
+			{
+				f1=true;
+				i++;
+				char ch = str.charAt(i);
+				map.put(ch, map.getOrDefault(ch,0)+1);
+				if(map.get(ch)==2)
+				{
+					break;
+				}
+				else
+				{
+					total+=i-j;
+				}	
+			}
+			while(j<i)
+			{
+				f2=true;
+				j++;
+				char ch = str.charAt(j);
+				map.put(ch, map.get(ch)-1);
+				if(map.get(ch)==1)
+				{
+					total+=i-j;
+					break;
+				}
+			}
+			if(f1==false && f2==false)
+				break;
+		}
+		return total;
+	}
+	public static void main(String[] args) 
+	{
+		String str = "gffg";
+		 
+	    System.out.print(countSub(str));
+	}
+}
