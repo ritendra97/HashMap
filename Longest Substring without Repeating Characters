@@ -1,0 +1,57 @@
+//Longest Substring without Repeating Characters
+import java.util.*;
+public class HashmapProblem 
+{
+	public static int longestUniqueSubsttr(String s)
+	{
+		HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+		
+		int i =-1;
+		int j=-1;
+		int len =0;
+		int max_len=Integer.MIN_VALUE;
+		
+		while(true)
+		{
+			boolean f1 = false;
+			boolean f2 = false;
+			
+			while(i<s.length()-1)
+			{
+				f1 = true;
+				i++;
+				char ch = s.charAt(i);
+				map.put(ch, map.getOrDefault(ch,0)+1);
+				if(map.get(ch)==1)
+				{
+					len = i-j;
+					if(max_len<len)
+						max_len=len;
+				}
+				else
+					break;
+			}
+			while(j<i && j<s.length()-1)
+			{
+				f1 = true;
+				j++;
+				char ch = s.charAt(j);
+				map.put(ch, map.get(ch)-1);
+				
+				if(map.get(ch)==1)
+					break;
+			}
+			if(f1==false && f2==false)
+		        break;
+		}
+		return max_len;
+	}
+	public static void main(String[] args) 
+	{
+		String str = "geeksforgeeks";
+	    System.out.println("The input string is " + str);
+	 
+	    int len = longestUniqueSubsttr(str); 
+	    System.out.println("The length of the longest " +"non-repeating character "                                                                            +"substring is " + len);
+	}
+}
