@@ -1,0 +1,77 @@
+// this below solution has(NMlogM +MNlongN) time complexity int next solution i optimized it
+import java.util.*;
+public class Practice 
+{
+	static void printAnagramsTogether(String wordArr[],int size)
+    {	 
+		HashMap<String,Vector<String>> map = new HashMap<>();
+		for(String s:wordArr)
+		{
+			char arr[] = s.toCharArray();
+			Arrays.sort(arr);
+			String s1 = new String(arr);
+			if(!map.containsKey(s1))
+			{
+				map.put(s1,new Vector<String>());
+			}
+			map.get(s1).add(s);
+		}
+		for(String s2:map.keySet())
+		{
+			Vector<String> v = map.get(s2);
+			if(v.size()>0)
+			{
+				System.out.print(v);
+			}
+		}
+    }
+	public static void main(String[] args) 
+	{
+		String wordArr[] = {"cat", "dog", "tac", "god","act", "gdo","nam","mna"}; 
+		int size = wordArr.length; 
+        printAnagramsTogether(wordArr, size);
+	}
+}
+// This below Solution i solved in O(NM) by using two HashMap
+import java.util.*;
+public class Practice 
+{
+	static ArrayList<ArrayList<String>>  printAnagramsTogether(String wordArr[],int size)
+    {	 
+		HashMap<HashMap<Character,Integer>,ArrayList<String>> bmap = new HashMap<HashMap<Character,Integer>,ArrayList<String>>();
+		
+		for(String str:wordArr)
+		{
+			HashMap<Character,Integer> freqmap = new HashMap<Character,Integer>();
+			for(int i=0;i<str.length();i++)
+			{
+				char ch = str.charAt(i);
+				freqmap.put(ch, freqmap.getOrDefault(ch, 0)+1);
+			}
+			if(bmap.containsKey(freqmap)==false)
+			{
+				ArrayList<String> ans = new ArrayList<String>();
+				ans.add(str);
+				bmap.put(freqmap, ans);
+			}
+			else
+			{
+				ArrayList<String> ans = bmap.get(freqmap);
+				ans.add(str);
+			}
+		}
+		ArrayList<ArrayList<String>> result = new ArrayList<>();
+		for(ArrayList<String> templist: bmap.values())
+		{
+			    result.add(templist);
+		}
+		return result;
+	}
+	public static void main(String[] args) 
+	{
+		String wordArr[] = {"cat", "dog", "tac", "god","act", "gdo","nam","mna"}; 
+		int size = wordArr.length; 
+        System.out.println(printAnagramsTogether(wordArr, size));
+	}
+}
+
