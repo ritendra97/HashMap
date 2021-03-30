@@ -1,0 +1,49 @@
+//Count Of Subarrays With Equal 0's 1's and 2's
+import java.util.HashMap;
+public class HashmapProblem 
+{
+	public static int getSubstringWithEqual012(int arr[])
+	{
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		
+		int count=0;
+		int count_0=0;
+		int count_1=0;
+		int count_2=0;
+		
+		int diff_10=0;
+		int diff_21=0;
+		
+		String key = diff_10+"#"+diff_21;
+		map.put(key, 1);
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			if(arr[i]==0)
+				count_0++;
+			else if(arr[i]==1)
+				count_1++;
+			else
+				count_2++;
+			
+			diff_10=count_1-count_0;
+			diff_21=count_2-count_1;
+			
+			key = diff_10+"#"+diff_21;
+			
+			if(map.containsKey(key))
+			{
+				count+=map.get(key);
+				map.put(key,map.get(key)+1);
+			}
+			else
+				map.put(key,1);
+		}
+		return count;
+	}
+	public static void main(String[] args) 
+	{
+		int arr[] = {1,0,2,1,0,0,2,1,1};
+		System.out.println(getSubstringWithEqual012(arr));
+	}
+}
