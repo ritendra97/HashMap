@@ -1,0 +1,29 @@
+//Check if two Strings are K Anagrams
+class GfG
+{
+      boolean areKAnagrams(String str1, String str2, int k)
+     {
+       int count=0;
+		HashMap<Character,Integer> map = new HashMap<>();
+		if(str1.length()!=str2.length())
+		   return false;
+		for(int i=0;i<str2.length();i++)
+		{
+			char ch = str2.charAt(i);
+			map.put(ch,map.getOrDefault(ch, 0)+1);
+		}
+		for(int i=0;i<str1.length();i++)
+		{
+			char ch = str1.charAt(i);
+			if(map.getOrDefault(ch,0)>0)
+				map.put(ch, map.get(ch)-1);
+		}
+		for(Character e:map.keySet())
+		{
+			count+=map.get(e);
+		}
+		if(k>=count)
+			return true;
+		return false;
+     }
+}
