@@ -1,0 +1,55 @@
+//Group Shifted Strings
+import java.util.*;
+public class HashmapProblem 
+{
+	public static String encode(String str)
+	{
+		String key="";
+		for(int i=0;i<str.length()-1;i++)
+		{
+			char f = str.charAt(i);
+			char s = str.charAt(i+1);
+			
+			int diff = s-f;
+			if(diff<0)
+				diff+=26;
+			key+=diff+"#";
+		}
+		key+=".";
+		
+		return key;
+	}
+	public static ArrayList<ArrayList<String>> groupShiftedString(String str[])
+	{
+		HashMap<String, ArrayList<String>> map = new HashMap<String,ArrayList<String>>();
+		for(String s:str)
+		{
+			String k = encode(s);
+			if(map.containsKey(k)==false)
+			{
+				ArrayList<String> val = new ArrayList<String>();
+				val.add(s);
+				map.put(k, val);
+			}
+			else
+			{
+				ArrayList<String> val = map.get(k);
+				val.add(s);
+			}
+		}
+		
+		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		for(ArrayList<String> temp :map.values())
+		{
+			result.add(temp);
+		}
+		return result;
+	}
+	public static void main(String[] args) 
+	{
+		String str[] = {"acd", "dfg", "wyz", "yab", "mop",
+                "bdfh", "a", "x", "moqs"};
+		
+		System.out.println(groupShiftedString(str));
+	}
+}
