@@ -1,0 +1,39 @@
+//Longest subarray with sum divisible by K
+import java.util.*;
+public class HashmapProblem 
+{
+	public static int longSubarrWthSumDivByK(int arr[],int n, int k)
+    {
+		HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+		int sum=0;
+		int max_len = Integer.MIN_VALUE;
+		map.put(0,-1);
+		
+		for(int i=0;i<arr.length;i++)
+		{
+			sum+=arr[i];
+			int rem = sum%k;
+			if(rem<0)
+				rem+=k;
+			if(map.containsKey(rem))
+			{
+				int len = i-map.get(rem);
+				if(max_len<len)
+					max_len=len;
+			}
+			else
+			{
+				map.put(rem, i);
+			}
+		}
+		return max_len;
+    }
+	public static void main(String[] args) 
+	{
+		int arr[] = {2, 7, 6, 1, 4, 5};
+        int n = arr.length;
+        int k = 3;
+          
+        System.out.println("Length = "+longSubarrWthSumDivByK(arr, n, k));
+	}
+}
