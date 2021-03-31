@@ -1,0 +1,48 @@
+//Fraction to Recurring Decimal (Leetcode 166) Solution
+import java.util.*;
+public class HashmapProblem 
+{
+	public static String Solution(int num,int den)
+	{
+		StringBuilder ans = new StringBuilder();
+		
+		int q = num/den;
+		int r = num%den;
+		ans.append(q);
+		
+		if(r==0)
+		{
+			return ans.toString();
+		}
+		else
+		{
+			ans.append(".");
+			HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
+			while(r!=0)
+			{
+				if(map.containsKey(r))
+				{
+					int a = map.get(r);
+					ans.insert(a, "(");
+					ans.append(")");
+					break;
+				}
+				else
+				{
+					map.put(r,ans.length());
+					r=r*10;
+					q=r/den;
+					r=r%den;
+					ans.append(q);
+				}		
+			}
+		}
+		return ans.toString();
+	}
+	public static void main(String[] args) 
+	{
+		int num = 93;
+		int den =7;
+		System.out.println(Solution(num,den));
+	}
+}
