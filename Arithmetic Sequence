@@ -1,0 +1,36 @@
+//Arithmetic Sequence
+import java.util.*;
+public class HashmapProblem 
+{
+	public static boolean Soution(int AP[])
+	{
+		HashSet<Integer> set = new HashSet<Integer>();
+		
+		int n = AP.length-1;
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+		
+		for(int i=0;i<AP.length;i++)
+		{
+			min = Math.min(min,AP[i]);
+			max = Math.max(max,AP[i]);
+			set.add(AP[i]);
+		}
+		
+		int common_diff = (max-min)/n;
+		
+		for(int i=0;i<AP.length;i++)
+		{
+			int find = min + (i*common_diff);
+			if(set.contains(find)==false)
+				return false;
+		}
+		return true;
+	}
+	public static void main(String[] args) 
+	{
+		int AP[] = {17,9,5,29,1,25,13,37,21,33};
+		
+		System.out.println(Soution(AP));
+	}
+}
