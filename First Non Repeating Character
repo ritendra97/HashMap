@@ -1,0 +1,26 @@
+//First Non Repeating Character
+import java.util.*;
+public class HashmpProbelm 
+{
+	public static int firstNonRepeating(String str)
+	{
+		HashMap<Character,Integer> freq =  new HashMap<Character,Integer>();
+		for(int i=0;i<str.length();i++)
+		{
+			char ch = str.charAt(i);
+			freq.put(ch,freq.getOrDefault(ch,0)+1);
+		}
+		for(int i=0;i<str.length();i++)
+		{
+			char ch = str.charAt(i);
+			if(freq.get(ch)==1)
+				return i;
+		}
+		return -1;
+	}
+	public static void main(String[] args) 
+	{
+		String str = "geeksforgeeks";
+        System.out.println(firstNonRepeating(str));
+	}
+}
