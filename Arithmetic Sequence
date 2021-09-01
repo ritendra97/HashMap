@@ -34,3 +34,33 @@ public class HashmapProblem
 		System.out.println(Soution(AP));
 	}
 }
+
+
+import java.util.*;
+
+public class Practice {
+	
+	static boolean checkIsAP(int arr[], int n)
+    {
+        if (n == 1)
+            return true;
+ 
+        // Sort array
+        Arrays.sort(arr);
+ 
+        // After sorting, difference between
+        // consecutive elements must be same.
+        int d = arr[1] - arr[0];
+        for (int i = 2; i < n; i++)
+            if (arr[i] - arr[i - 1] != d)
+                return false;
+ 
+        return true;
+    }
+ 
+	public static void main(String[] args) {
+		int AP[] = { 17, 9, 5, 29, 1, 25, 13, 37, 21, 33 };
+
+		System.out.println(checkIsAP(AP,AP.length));
+	}
+}
