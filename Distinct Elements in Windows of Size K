@@ -34,3 +34,61 @@ public class HashmpProblem
 		System.out.println(countDistinct(arr, arr.length, k));
 	}
 }
+
+Better than above
+import java.util.*;
+
+public class Practice {
+
+	public static void distinctElement(int arr[], int k) {
+
+		int i = -1;
+		int j = 0;
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+		while (true) {
+			boolean f1 = false;
+			boolean f2 = false;
+
+			while (i < arr.length - 1) {
+
+				f1 = true;
+				i++;
+				if (map.containsKey(arr[i])) {
+					map.put(arr[i], map.get(arr[i])+1);
+				} else {
+					map.put(arr[i], 1);
+				}
+
+				if ((i - j + 1) == k) {
+					System.out.println(map.size());
+					break;
+				}
+
+			}
+			while (j < i && j < arr.length - 1) {
+
+				f1 = true;
+				
+				if (map.get(arr[j]) == 1) {
+					map.remove(arr[j]);
+				} else {
+					map.put(arr[j], map.get(arr[j]) - 1);
+				}
+				j++;
+				if (i - j + 1 < k) {
+					break;
+				}
+			}
+
+			if (f1 == false && f2 == false) {
+				break;
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		int arr[] = { 1, 2, 4, 4};
+		distinctElement(arr, 2);
+	}
+}
