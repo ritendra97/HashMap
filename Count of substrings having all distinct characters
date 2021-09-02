@@ -1,4 +1,36 @@
 //Count of substrings having all distinct characters
+
+Nive Approach
+import java.util.*;
+
+public class Practice {
+
+	public static int countSubstringatmostK(String s) {
+
+		int overall_count = 0;
+		for (int i = 0; i < s.length(); i++) {
+			int count = 0;
+			int character = 0;
+			HashSet<Character> set = new HashSet<Character>();
+			for (int j = i; j < s.length(); j++) {
+				character++;
+				set.add(s.charAt(j));
+				if(set.size()==character) {
+					count++;
+				}
+			}
+			overall_count += count;
+		}
+
+		return overall_count;
+	}
+
+	public static void main(String[] args) {
+		String str = "aabbc";
+		System.out.println(countSubstringatmostK(str));
+	}
+}
+
 // Time O(n)
 // Space O(n);
 import java.util.*;
