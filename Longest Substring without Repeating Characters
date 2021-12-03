@@ -52,6 +52,6 @@ public class HashmapProblem
 	    System.out.println("The input string is " + str);
 	 
 	    int len = longestUniqueSubsttr(str); 
-	    System.out.println("The length of the longest " +"non-repeating character "                                                                            +"substring is " + len);
+	    System.out.println("The length of the longest " +"non-repeating character "+"substring is " + len);
 	}
 }
